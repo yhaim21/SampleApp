@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+You are going from {{ country1.name }} to {{ country2.name }}. The currency in {{ country1.name }} is {{ currency1.symbol }}.
+ The currency in {{ country2.name }} is {{ currency2.symbol }}. The current exchange rate for 1 unit of {{ currency1.symbol}}
+ is {{ rate }} units of {{ currency2.symbol }}
+{% endblock %}

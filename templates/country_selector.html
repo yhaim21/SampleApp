@@ -1,0 +1,17 @@
+{% extends "base1.html" %}
+{% block content %}
+<form action="{% url 'company_info' %}" method="get">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <h4>Please see the list of companies we will soon have information on </h4>
+                    <select name="company name" class="form-control d-inline-block" size="20" >
+                        {% for c in Exchange %}
+                            <option value="{{ Exchange.id }}">{{ Exchange.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+</form>
+
+{% endblock %}

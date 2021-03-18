@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="jumbotron text-center">
+        <p>What a wonderful App this is!</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Currency Rates!</h3>
+                <p>Using this app, you can get up to the second exchange rates easily!</p>
+            </div>
+            <div class="col-sm-4">
+                <h3>Navigation!</h3>
+                <p> Please choose an action from the following options
+                <p>
+                    <a href="{% url 'showform' %}">Enter data in a form</a><br>
+                    <a href="{% url 'showdivs' %}">View 3 divs side by side</a><br>
+                    <a href=“">recipe sites</a><br></p>
+            </div>
+            <div class="col-sm-4">
+                <h3>The future!</h3>
+                <p>Soon, you will be able to invest your money by buying, selling and saving in any currency!</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

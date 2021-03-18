@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="{% url 'exchange_rate_info' %}" method="get">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <h4>Please select the company you are searching for </h4>
+                    <select name="country_from" class="form-control d-inline-block" size="20" >
+                        {% for c in Company %}
+                            <option value="{{ Company.id }}">{{ Company.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+</form>
+
+{% endblock %}
