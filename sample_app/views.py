@@ -81,10 +81,10 @@ def exch_rate(request):
 
 def company_selection(request):
     data= dict()
-    try:
-        support_functions.read_function()
-    except:
-        print("error!")
+    #try:
+    #    support_functions.read_function()
+    #except:
+    #    print("error!")
     companies= Stock.objects.all().values('name')
     url= Stock.objects.all().values('url')
     ticker= Stock.objects.all().values('ticker')
