@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="SampleApp22" type="Python.DjangoServer" factoryName="Django server">
+  <configuration default="false" name="SampleApp226" type="Python.DjangoServer" factoryName="Django server" singleton="false">
     <module name="SampleApp2" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
@@ -12,7 +12,7 @@
     <option name="IS_MODULE_SDK" value="true" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
-    <option name="launchJavascriptDebuger" value="false" />
+    <option name="launchJavascriptDebuger" value="true" />
     <option name="port" value="8000" />
     <option name="host" value="" />
     <option name="additionalOptions" value="" />
