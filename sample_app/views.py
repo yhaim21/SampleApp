@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from sample_app import support_functions
-from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange
+from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
