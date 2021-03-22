@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from sample_app import support_functions
-from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange
+from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
@@ -34,7 +34,6 @@ def form_results(request):
     data['person'] = username
     data['selected_stock'] = stock
     data['amount'] = returned_amount
-
     return render(request,"form_results.html",context=data)
 
 def maintenance(request):
@@ -81,10 +80,10 @@ def exch_rate(request):
 
 def company_selection(request):
     data= dict()
-    #try:
-    #    support_functions.read_function()
-    #except:
-    #    print("error in company selection!")
+    try:
+        support_functions.read_function()
+    except:
+        print("error in company selection!")
     companies= Stock.objects.all().values('name')
     id=Stock.objects.all().values('id')
     url= Stock.objects.all().values('url')
