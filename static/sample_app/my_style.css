@@ -12,7 +12,9 @@
     font-size: xx-large;
     color: crimson;
 }
-
+br {
+        line-height: 150%;
+     }
 #logo {
     color: coral;
     font-family: 'lobster';

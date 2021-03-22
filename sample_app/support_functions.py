@@ -132,6 +132,7 @@ def add_company(stock_list):
         company_ticker = Stock.objects.get(ticker=company[1])
         c = Company(name=company_name, stock=company_ticker, exchange=NYSE)
         c.save()
+
 def get_stock_details(url):
     stock_details = list()
     import requests

@@ -120,6 +120,16 @@ def ticker_sel(request):
         data['url']=Stock.objects.get(name=ticker1).url
         data['ticker']=Stock.objects.get(name=ticker1).ticker
         data['name']=Stock.objects.get(name=ticker1).name
+        stock_details = support_functions.get_stock_details(data['url'])
+        data['price_chance'] = stock_details[0]
+        data['change_percent'] = stock_details[1]
+        data['stock_price'] = stock_details[2]
+        data['market_cap'] = stock_details[3]
+        data['shares_in_issue'] = stock_details[4]
+        data['revenue'] = stock_details[5]
+        data['profit_loss'] = stock_details[6]
+        data['EPS'] = stock_details[7]
+        data['PE_ratio'] = stock_details[8]
     except:
         ticker="AHC"
         data['ticker']=ticker
