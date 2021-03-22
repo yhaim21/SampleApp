@@ -115,9 +115,9 @@ def ticker_sel(request):
     data=dict()
     try:
         ticker1 = request.GET['c_name']
-        print(Stock.objects.all.filter(id=ticker1))
-        data['name']=Stock.objects.filter(id=ticker1)
-        print("hi")
+        data['url']=Stock.objects.get(name=ticker1).url
+        data['ticker']=Stock.objects.get(name=ticker1).ticker
+        data['name']=Stock.objects.get(name=ticker1).name
     except:
         ticker="AHC"
         data['ticker']=ticker
