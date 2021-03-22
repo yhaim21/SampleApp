@@ -1,15 +1,11 @@
 from django.shortcuts import render
 from sample_app import support_functions
-from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder
+from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange
 from django.contrib.auth.forms import UserCreationForm
-
 # Create your views here.
 
 def home(request):
     data = dict()
-    user = request.user
-    if user.is_superuser:
-        return render(request, "maintenance.html", context=data)
     import datetime
     date = datetime.datetime.now()
     data['now'] = date
@@ -30,13 +26,13 @@ def showform(request):
 def form_results(request):
     data=dict()
     username = request.GET['name']
-    date = request.GET['date']
+    stock = request.GET['stock']
     amount = float(request.GET['dollars'])
-    print("data test:", username, date, amount)
+    print("data test:", username, stock, amount)
     commission = amount*0.20
     returned_amount = amount-commission
     data['person'] = username
-    data['selected_date'] = date
+    data['selected_stock'] = stock
     data['amount'] = returned_amount
 
     return render(request,"form_results.html",context=data)
@@ -70,6 +66,7 @@ def exch_rate(request):
         data['country2'] = Country.objects.get(id=country2)
         currency1 = Country.objects.get(id=country1).currency
         currency2 = Country.objects.get(id=country2).currency
+        support_functions.update_xrates(currency1)
         data['currency1'] = currency1
         data['currency2'] = currency2
         try:
@@ -85,16 +82,16 @@ def exch_rate(request):
 def company_selection(request):
     data= dict()
     try:
-        list = support_functions.get_stock_list()
-        support_functions.add_exchange()
-        support_functions.add_stocks(list)
-        support_functions.add_company(list)
+        support_functions.read_function()
     except:
         print("error!")
-    companies= Company.objects.all()
-    print(companies)
+    companies= Stock.objects.all().values('name')
+    url= Stock.objects.all().values('url')
+    ticker= Stock.objects.all().values('ticker')
     data['companies']= companies
-    return render(request, "company_selector.html", data)
+    data['urls']= url
+    data['tickers']= ticker
+    return render(request, "company_selector.html", context=data)
 
 def register_new_user(request):
     context = dict()
@@ -112,7 +109,34 @@ def register_new_user(request):
 
 def entry(request):
     data = dict()
+    return render(request, "entry.html", context=data)
 
-    return render(request,"entry.html",context=data)
+def ticker_sel(request):
+    data=dict()
+    try:
+        ticker1 = request.GET['c_name']
+        print(Stock.objects.all.filter(id=ticker1))
+        data['name']=Stock.objects.filter(id=ticker1)
+        print("hi")
+    except:
+        ticker="AHC"
+        data['ticker']=ticker
+        print("fuck")
+    #url = Stock.objects.all(id=ticker).url
+    #data['url']= url
+    #print(url)
+    return render(request,"company_details.html",data)
 
-#I am testing if i can successfully make a new branch (RL)
+def form_results2(request):
+    data=dict()
+    username = request.GET['name']
+    stock = request.GET['stock']
+    amount = float(request.GET['dollars'])
+    print("data test:", username, stock, amount)
+    commission = amount*0.20
+    returned_amount = amount-commission
+    data['person'] = username
+    data['selected_stock'] = stock
+    data['amount'] = returned_amount
+    return render(request,"form_results.html",context=data)
+
