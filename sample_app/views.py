@@ -84,13 +84,15 @@ def company_selection(request):
     try:
         support_functions.read_function()
     except:
-        print("error!")
+        print("error in company selection!")
     companies= Stock.objects.all().values('name')
+    id=Stock.objects.all().values('id')
     url= Stock.objects.all().values('url')
     ticker= Stock.objects.all().values('ticker')
     data['companies']= companies
     data['urls']= url
     data['tickers']= ticker
+    data['id']= id
     return render(request, "company_selector.html", context=data)
 
 def register_new_user(request):
