@@ -1,20 +1,10 @@
 {% extends "base1.html" %}
 {% block content %}
-    <script>
-        function AutoRefresh( t ) {
-            setTimeout("location.reload(true);", t);
-        }
-    </script>
     <h3>{{ name }} ({{ ticker }})</h3><br>
-    <span id = "update">
-        The price of the stock is: {{ stock_price }}<br>
-        The market cap is: {{ market_cap }}<br>
-        Shares in Issue: {{ shares_in_issue }}<br>
-        EPS: {{ EPS }}<br>
-        PE Ratio: {{ PE_ratio }}<br>
-    </span>
-    <script>
-        setInterval(AutoRefresh, 10000);
-    </script>
+    The price of the stock is: {{ stock_price }}<br>
+    The market cap is: {{ market_cap }}<br>
+    Shares in Issue: {{ shares_in_issue }}<br>
+    EPS: {{ EPS }}<br>
+    PE Ratio: {{ PE_ratio }}<br>
     *updates every 10 seconds
 {% endblock %}
