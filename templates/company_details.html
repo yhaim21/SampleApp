@@ -6,5 +6,11 @@
     Shares in Issue: {{ shares_in_issue }}<br>
     EPS: {{ EPS }}<br>
     PE Ratio: {{ PE_ratio }}<br>
-    *updates every 10 seconds
+    <p style="font-size:10px">*updates every 10 seconds</p>
+    <script>
+        window.setInterval('refresh()', 10000);
+        function refresh() {
+            window .location.reload();
+        }
+    </script>
 {% endblock %}

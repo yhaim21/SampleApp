@@ -163,17 +163,16 @@ def read_function():
     import pandas as pd
     df=pd.read_csv("./static/stocks_list.csv")
     stock_list=df.values.tolist()
-    for stock in stock_list:
-        stock_name = stock[0]
-        stock_ticker = stock[1]
-        stock_url =stock[2]
-        s = Stock(name=stock_name, ticker=stock_ticker, url=stock_url)
-        #print(stock_name, stock_url, stock_ticker)
-        s.save()
+    if (Stock.objects.count() == 0):
+        for stock in stock_list:
+            stock_name = stock[0]
+            stock_ticker = stock[1]
+            stock_url =stock[2]
+            s = Stock(name=stock_name, ticker=stock_ticker, url=stock_url)
+            #print(stock_name, stock_url, stock_ticker)
+            s.save()
     #print("worked")
     return
 
-#is there a way that we run s.save() just once? (slowing the webpage)
-# the function in view is not working
 # javascript for auto refresh
 #file upload by user
