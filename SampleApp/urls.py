@@ -28,8 +28,7 @@ urlpatterns = [
     path('django/tango/formresults', views.form_results, name="showformresults"),
     path('maintenance', views.maintenance, name='maintenance'),
     path('currency-selection',views.currency_selection,name="currency_selector"),
-    path('company_info',views.company_selection,name="company_info"),
+    path('exchange_rate_info',views.exch_rate,name="exchange_rate_info"),
     path('register',views.register_new_user,name="register_user"),
-    path('ticker_select', views.ticker_sel, name="ticker_select"),
 
 ]

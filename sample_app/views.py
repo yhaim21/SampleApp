@@ -6,13 +6,16 @@ from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     data = dict()
+    user =request.user
+    if user.is_superuser:
+        return render(request,"maintenance.html",context=data)
     import datetime
     date = datetime.datetime.now()
     data['now'] = date
     data['city'] = "New York"
     print(data)
-    #return render(request,"home.html",context=data)
-    return render(request, "home.html")
+    return render(request, "home.html",context=data)
+
 
 def show3divs(request):
     data = dict()
