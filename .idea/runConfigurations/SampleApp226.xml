@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Try" type="Python.DjangoServer" factoryName="Django server" singleton="false">
+  <configuration default="false" name="SampleApp226" type="Python.DjangoServer" factoryName="Django server" singleton="false">
     <module name="SampleApp2" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
@@ -7,9 +7,9 @@
       <env name="PYTHONUNBUFFERED" value="1" />
       <env name="DJANGO_SETTINGS_MODULE" value="SampleApp.settings" />
     </envs>
-    <option name="SDK_HOME" value="$PROJECT_DIR$/../GroupProject/venv/bin/python" />
+    <option name="SDK_HOME" value="" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    <option name="IS_MODULE_SDK" value="false" />
+    <option name="IS_MODULE_SDK" value="true" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <option name="launchJavascriptDebuger" value="false" />
