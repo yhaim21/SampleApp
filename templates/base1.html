@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Wall street Thesis</title>
+    <title>Outsider Trading</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -13,19 +13,17 @@
 <body>
 
 <p style="text-align:left;">
-    <span id="logo">Wall Street Thesis</span>
     <span style="float:right;">
         {% if user.username %}
             <span class="large-font">Hello {{ user.username }}!</span><br>
             <a href="{% url 'logout' %}"><button>logout</button></a>
         {% else %}
             <span class="large-font">Hello Guest User!</span><br>
-            <a href="{% url 'login' %}"><button>login</button></a>
         {% endif %}
     </span>
 </p>
 
-<h1 id="logo">Wall Street Thesis</h1>
+<h1 id="logo">Outsider Trading</h1>
 <img src="https://i.redd.it/1tdjq7plg2321.jpg" width="400" height="300" alt="symbol">
 {% block content %}
     <-- This is where the page content will go! -->
