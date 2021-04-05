@@ -6,6 +6,10 @@
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
       <env name="DJANGO_SETTINGS_MODULE" value="SampleApp.settings" />
+      <env name="DATABASE_HOST" value="database-3.c2cgevt4ub4k.us-east-2.rds.amazonaws.com" />
+      <env name="DATABASE_NAME" value="mydatabase" />
+      <env name="DATABASE_PASSWORD" value="Yh848967" />
+      <env name="DATABASE_USER" value="masteruser" />
     </envs>
     <option name="SDK_HOME" value="" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
