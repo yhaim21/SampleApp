@@ -132,7 +132,6 @@ def add_company(stock_list):
         company_ticker = Stock.objects.get(ticker=company[1])
         c = Company(name=company_name, stock=company_ticker, exchange=NYSE)
         c.save()
-
 def get_stock_details(url):
     stock_details = list()
     import requests
@@ -158,7 +157,6 @@ def get_stock_details(url):
     PE_ratio = rows4[6].get_text()
     stock_details = (price_change, change_percent, stock_price, market_cap, shares_in_issue, revenue, profit_loss, EPS, PE_ratio)
     return stock_details
-
 def read_function():
     import pandas as pd
     df=pd.read_csv("./static/stocks_list.csv")
@@ -173,6 +171,5 @@ def read_function():
             s.save()
     #print("worked")
     return
-
 # javascript for auto refresh
 #file upload by user
