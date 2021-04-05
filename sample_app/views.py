@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from sample_app import support_functions
-from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder
+from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder, Portfolio
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
-
 def home(request):
     data = dict()
     user =request.user
@@ -15,30 +14,27 @@ def home(request):
     data['city'] = "New York"
     print(data)
     return render(request, "home.html",context=data)
-
-
 def show3divs(request):
     data = dict()
-
     return render(request,"div_test.html",context=data)
-
 def showform(request):
     data=dict()
     return render(request,"form_test.html",context=data)
-
 def form_results(request):
     data=dict()
-    username = request.GET['name']
-    stock = request.GET['stock']
-    amount = float(request.GET['dollars'])
-    print("data test:", username, stock, amount)
-    commission = amount*0.20
-    returned_amount = amount-commission
-    data['person'] = username
-    data['selected_stock'] = stock
-    data['amount'] = returned_amount
+    user = request.user
+    account_holder=AccountHolder.objects.get(user=user)
+    ticker = request.GET['ticker']
+    quantity = request.GET['quantity']
+    try:
+        p1=Portfolio.objects.get(user_account=account_holder,user_stock_ticker=ticker)
+        p1.user_stock_quantity=quantity
+        p1.save()
+    except:
+        p1=Portfolio(user_account=account_holder,user_stock_ticker=ticker,user_stock_quantity=quantity)
+        p1.save()
+    data["Portfolio"]=Portfolio.objects.filter(user_account=account_holder)
     return render(request,"form_results.html",context=data)
-
 def maintenance(request):
     data = dict()
     try:
@@ -49,16 +45,12 @@ def maintenance(request):
     except:
         pass
     return render(request,"maintenance.html",context=data)
-
-
-#Make sure you’ve imported Country from models.py!
+#Make sure you've imported Country from models.py!
 def currency_selection(request):
     data = dict()
     countries = Country.objects.all()
     data['countries'] = countries
-
     return render(request,"country_selector1.html",context=data)
-
 def exch_rate(request):
     data=dict()
     try:
@@ -79,8 +71,6 @@ def exch_rate(request):
     except:
         pass
     return render(request,"exchange_detail.html",context=data)
-
-
 def company_selection(request):
     data= dict()
     try:
@@ -96,7 +86,6 @@ def company_selection(request):
     data['tickers']= ticker
     data['id']= id
     return render(request, "company_selector.html", context=data)
-
 def register_new_user(request):
     context = dict()
     form = UserCreationForm(request.POST)
@@ -110,11 +99,9 @@ def register_new_user(request):
         form = UserCreationForm()
         context['form'] = form
         return render(request, "registration/register.html", context)
-
 def entry(request):
     data = dict()
     return render(request, "entry.html", context=data)
-
 def ticker_sel(request):
     data=dict()
     try:
@@ -135,12 +122,11 @@ def ticker_sel(request):
     except:
         ticker="AHC"
         data['ticker']=ticker
-        print("fuck")
+        print("Not Working")
     #url = Stock.objects.all(id=ticker).url
     #data['url']= url
     #print(url)
     return render(request,"company_details.html",data)
-
 def form_results2(request):
     data=dict()
     username = request.GET['name']
@@ -153,4 +139,3 @@ def form_results2(request):
     data['selected_stock'] = stock
     data['amount'] = returned_amount
     return render(request,"form_results.html",context=data)
-

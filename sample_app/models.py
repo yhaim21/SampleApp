@@ -8,7 +8,7 @@ class Currency(models.Model):
         return self.name + " " + self.symbol
     def __str__(self):
         return self.name + " " + self.symbol
-class  Country(models.Model):
+class Country(models.Model):
     name=models.CharField(max_length=100)
     capital = models.CharField(max_length=50)
     wiki_link = models.URLField()
@@ -56,4 +56,14 @@ class AccountHolder(models.Model):
         return self.user.username
     def __repr__(self):
         return self.user.username
+class Portfolio(models.Model):
+    user_account = models.ForeignKey(AccountHolder, null=True, on_delete=models.SET_NULL)
+    user_stock_ticker = models.CharField(max_length=40)
+    user_stock_quantity = models.CharField(max_length=40)
+    def __str__(self):
+        return self.user_account.user+ " " + self.stock.name+ " " + self.stock.ticker+ " " + self.user_quantity
+    def __repr__(self):
+        return self.user_account.user+ " " + self.stock.name+ " " + self.stock.ticker+ " " + self.user_quantity
+
+
 ...
