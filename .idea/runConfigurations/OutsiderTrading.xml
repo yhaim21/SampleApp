@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="yoav" type="Python.DjangoServer" factoryName="Django server" singleton="false">
+  <configuration default="false" name="OutsiderTrading" type="Python.DjangoServer" factoryName="Django server" singleton="false">
     <module name="SampleApp2" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
