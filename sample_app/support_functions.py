@@ -1,4 +1,4 @@
-from sample_app.models import Currency, Country, Rates, Company, Exchange, Stock
+from sample_app.models import Currency, Country, Rates, Company, Exchange, Stock, Portfolio
 def get_currency_list():
     currency_list = list()
     import requests

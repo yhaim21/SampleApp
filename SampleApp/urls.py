@@ -1,5 +1,4 @@
 """SampleApp URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
 Examples:
@@ -16,8 +15,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from sample_app import views
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -31,5 +28,4 @@ urlpatterns = [
     path('company_info',views.company_selection,name="company_info"),
     path('register',views.register_new_user,name="register_user"),
     path('ticker_select', views.ticker_sel, name="ticker_select"),
-
 ]

@@ -8,11 +8,16 @@
     PE Ratio: {{ PE_ratio }}<br>
     <p style="font-size:10px">*updates every 10 seconds</p>
     <script>
-        window.setInterval('refresh()', 10000);
+        window.setInterval('refresh()', 20000);
         function refresh() {
             window .location.reload();
         }
     </script>
-
+<form action="{% url 'showformresults' %}" method="get">
+ <table>
+ <tr><td>Number of stocks you hold:</td><td><input name="quantity" type="number" step="1" min="1" max="500"></td></tr>
+ <tr><td><input value="Add to Portfolio" type="submit"></td></tr>
+     <input name="ticker" value="{{ ticker }}" type ="hidden">
+ </table>
+</form>
 {% endblock %}
-

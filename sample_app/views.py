@@ -106,10 +106,9 @@ def ticker_sel(request):
     data=dict()
     try:
         ticker1 = request.GET['c_name']
-        stock=Stock.objects.get(name=ticker1)
-        data['url']=stock.url
-        data['ticker']=stock.ticker
-        data['name']=stock.name
+        data['url']=Stock.objects.get(name=ticker1).url
+        data['ticker']=Stock.objects.get(name=ticker1).ticker
+        data['name']=Stock.objects.get(name=ticker1).name
         stock_details = support_functions.get_stock_details(data['url'])
         data['price_chance'] = stock_details[0]
         data['change_percent'] = stock_details[1]
@@ -123,7 +122,7 @@ def ticker_sel(request):
     except:
         ticker="AHC"
         data['ticker']=ticker
-        print("Not Working")
+        print("fuck")
     #url = Stock.objects.all(id=ticker).url
     #data['url']= url
     #print(url)
