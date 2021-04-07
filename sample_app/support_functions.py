@@ -159,6 +159,7 @@ def get_stock_details(url):
     return stock_details
 def read_function():
     import pandas as pd
+    print("read file")
     df=pd.read_csv("./static/stocks_list.csv")
     stock_list=df.values.tolist()
     if (Stock.objects.count() == 0):

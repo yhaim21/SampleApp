@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sample_app.apps.SampleAppConfig',
-    #'sample_app.apps.SampleApp',
 ]
 
 MIDDLEWARE = [
@@ -77,30 +76,15 @@ WSGI_APPLICATION = 'SampleApp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST'),
-        'PORT': '5432'
-    }
-}
 
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-url="postgresql://masteruser:Yh848967@database-3.c2cgevt4ub4k.us-east-2.rds.amazonaws.com:5432/mydatabase"
-DATABASES['default'] = dj_database_url.parse(url, conn_max_age=600)
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
