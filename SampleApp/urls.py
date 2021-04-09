@@ -28,4 +28,6 @@ urlpatterns = [
     path('company_info',views.company_selection,name="company_info"),
     path('register',views.register_new_user,name="register_user"),
     path('ticker_select', views.ticker_sel, name="ticker_select"),
+    path('upload_file', views.upload_file, name = "upload_file"),
+    path('view_file_list',views.handle_uploaded_file, name = "view_file_list")
 ]

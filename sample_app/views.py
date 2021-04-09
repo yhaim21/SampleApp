@@ -1,7 +1,12 @@
+import os
+
 from django.shortcuts import render
 from sample_app import support_functions
-from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder, Portfolio
+from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder, Portfolio, UploadedFiles
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponseRedirect
+from .forms import UploadFileForm
+
 # Create your views here.
 def home(request):
     data = dict()
@@ -12,7 +17,6 @@ def home(request):
     date = datetime.datetime.now()
     data['now'] = date
     data['city'] = "New York"
-    print(data)
     return render(request, "home.html",context=data)
 def show3divs(request):
     data = dict()
@@ -71,6 +75,7 @@ def exch_rate(request):
     except:
         pass
     return render(request,"exchange_detail.html",context=data)
+
 def company_selection(request):
     data= dict()
     try:
@@ -122,10 +127,7 @@ def ticker_sel(request):
     except:
         ticker="AHC"
         data['ticker']=ticker
-        print("fuck")
-    #url = Stock.objects.all(id=ticker).url
-    #data['url']= url
-    #print(url)
+        print("error")
     return render(request,"company_details.html",data)
 def form_results2(request):
     data=dict()
@@ -139,3 +141,25 @@ def form_results2(request):
     data['selected_stock'] = stock
     data['amount'] = returned_amount
     return render(request,"form_results.html",context=data)
+
+def upload_file(request):
+    data = {}
+    form = UploadFileForm(request.POST, request.FILES)
+    if form.is_valid():
+        file = request.FILES['myfile']
+        handle_uploaded_file(request, file)
+    else:
+        print(form.errors)
+    account_holder = AccountHolder.objects.get(user=request.user)
+    data["UploadedFiles"] = UploadedFiles.objects.filter(user_account=account_holder)
+    return render(request, 'view_file_list.html', context=data)
+
+def handle_uploaded_file(request, f):
+    user = request.user
+    account_holder = AccountHolder.objects.get(user=user)
+    try:
+        f1=UploadedFiles.objects.create(user_account=account_holder, user_uploaded_file=f)
+        f1.save()
+        print("Working")
+    except Exception as error:
+        print(error)

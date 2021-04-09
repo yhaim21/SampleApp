@@ -64,4 +64,14 @@ class Portfolio(models.Model):
         return self.user_account.user+ " " + self.stock.name+ " " + self.stock.ticker+ " " + self.user_quantity
     def __repr__(self):
         return self.user_account.user+ " " + self.stock.name+ " " + self.stock.ticker+ " " + self.user_quantity
+
+class UploadedFiles(models.Model):
+    user_account = models.ForeignKey(AccountHolder, null=True, on_delete=models.SET_NULL)
+    user_uploaded_file = models.FileField()
+    def __str__(self):
+        return  self.user_uploaded_file.name
+    def __repr__(self):
+        return self.user_uploaded_file.name
+
+
 ...
