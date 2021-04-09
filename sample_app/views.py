@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from sample_app import support_functions
 from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder, Portfolio
@@ -15,7 +17,6 @@ def home(request):
     date = datetime.datetime.now()
     data['now'] = date
     data['city'] = "New York"
-    print(data)
     return render(request, "home.html",context=data)
 def show3divs(request):
     data = dict()
@@ -74,6 +75,7 @@ def exch_rate(request):
     except:
         pass
     return render(request,"exchange_detail.html",context=data)
+
 def company_selection(request):
     data= dict()
     try:
@@ -149,11 +151,14 @@ def upload_file(request):
         if form.is_valid():
             handle_uploaded_file(request.FILES['file'])
             return HttpResponseRedirect('home.html')
+        else:
+            print(form.errors)
     else:
         form = UploadFileForm()
     return render(request, 'home.html', {'form': form})
 
 def handle_uploaded_file(f):
     with open('some/file/name.txt', 'wb+') as destination:
+        print(os.path.abspath(str(destination)))
         for chunk in f.chunks():
             destination.write(chunk)
