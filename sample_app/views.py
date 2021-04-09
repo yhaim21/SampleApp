@@ -127,10 +127,7 @@ def ticker_sel(request):
     except:
         ticker="AHC"
         data['ticker']=ticker
-        print("fuck")
-    #url = Stock.objects.all(id=ticker).url
-    #data['url']= url
-    #print(url)
+        print("error")
     return render(request,"company_details.html",data)
 def form_results2(request):
     data=dict()
@@ -147,16 +144,12 @@ def form_results2(request):
 
 def upload_file(request):
     data = {}
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            file = request.FILES['myfile']
-            handle_uploaded_file(request, file)
-
-        else:
-            print(form.errors)
+    form = UploadFileForm(request.POST, request.FILES)
+    if form.is_valid():
+        file = request.FILES['myfile']
+        handle_uploaded_file(request, file)
     else:
-        form = UploadFileForm()
+        print(form.errors)
     account_holder = AccountHolder.objects.get(user=request.user)
     data["UploadedFiles"] = UploadedFiles.objects.filter(user_account=account_holder)
     return render(request, 'view_file_list.html', context=data)
@@ -167,13 +160,6 @@ def handle_uploaded_file(request, f):
     try:
         f1=UploadedFiles.objects.create(user_account=account_holder, user_uploaded_file=f)
         f1.save()
-        #data["file"] = f.name
         print("Working")
     except Exception as error:
         print(error)
-        #f1 = UploadedFiles.objects.POST(user_account=account_holder, user_uploaded_file=file)
-        #f1.save()
-    #with open('models.UploadedFiles', 'wb+') as destination:
-     #   print(os.path.abspath(str(destination)))
-      #  for chunk in f.chunks():
-       #     destination.write(chunk)
