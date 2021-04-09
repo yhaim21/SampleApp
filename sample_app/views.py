@@ -2,7 +2,7 @@ import os
 
 from django.shortcuts import render
 from sample_app import support_functions
-from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder, Portfolio
+from sample_app.models import Country, Currency, Rates, Stock, Company, Exchange, AccountHolder, Portfolio, UploadedFiles
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 from .forms import UploadFileForm
@@ -146,19 +146,34 @@ def form_results2(request):
     return render(request,"form_results.html",context=data)
 
 def upload_file(request):
+    data = {}
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('home.html')
+            file = request.FILES['myfile']
+            handle_uploaded_file(request, file)
+
         else:
             print(form.errors)
     else:
         form = UploadFileForm()
-    return render(request, 'home.html', {'form': form})
+    account_holder = AccountHolder.objects.get(user=request.user)
+    data["UploadedFiles"] = UploadedFiles.objects.filter(user_account=account_holder)
+    return render(request, 'view_file_list.html', context=data)
 
-def handle_uploaded_file(f):
-    with open('some/file/name.txt', 'wb+') as destination:
-        print(os.path.abspath(str(destination)))
-        for chunk in f.chunks():
-            destination.write(chunk)
+def handle_uploaded_file(request, f):
+    user = request.user
+    account_holder = AccountHolder.objects.get(user=user)
+    try:
+        f1=UploadedFiles.objects.create(user_account=account_holder, user_uploaded_file=f)
+        f1.save()
+        #data["file"] = f.name
+        print("Working")
+    except Exception as error:
+        print(error)
+        #f1 = UploadedFiles.objects.POST(user_account=account_holder, user_uploaded_file=file)
+        #f1.save()
+    #with open('models.UploadedFiles', 'wb+') as destination:
+     #   print(os.path.abspath(str(destination)))
+      #  for chunk in f.chunks():
+       #     destination.write(chunk)
