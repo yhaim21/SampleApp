@@ -22,7 +22,12 @@
             </div>
             <div class="col-sm-4">
                 <h3>The future!</h3>
-                <p>Soon, you will be able to find stock information thesis!</p>
+                <form enctype="multipart/form-data" method="post" action="{% url 'upload_file' %}">
+                    {% csrf_token %}
+                    <label for="myfile">Upload Analysis Here </label>
+                    <input id="myfile" type="file" name="myfile">
+                    <input type="submit" value="Upload">
+                </form>
             </div>
         </div>
     </div>
