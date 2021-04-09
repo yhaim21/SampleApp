@@ -65,3 +65,5 @@ class Portfolio(models.Model):
     def __repr__(self):
         return self.user_account.user+ " " + self.stock.name+ " " + self.stock.ticker+ " " + self.user_quantity
 ...
+
+#Testing...123 
