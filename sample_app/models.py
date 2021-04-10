@@ -72,6 +72,4 @@ class UploadedFiles(models.Model):
         return  self.user_uploaded_file.name
     def __repr__(self):
         return self.user_uploaded_file.name
-
-
 ...

@@ -129,6 +129,7 @@ def ticker_sel(request):
         data['ticker']=ticker
         print("error")
     return render(request,"company_details.html",data)
+
 def form_results2(request):
     data=dict()
     username = request.GET['name']
