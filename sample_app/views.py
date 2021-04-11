@@ -164,9 +164,12 @@ def form_results(request):
     except:
         p1 = Portfolio(user_account=account_holder, user_stock_ticker=ticker, user_stock_quantity=quantity)
         p1.save()
-    quantity=list()
     print("this is the line printed before p1")
-    print(Portfolio.objects.only('user_stock_quantity'))
+    p_list= list(Portfolio.objects.filter(user_account=account_holder).values())
+    q_list=list()
+    for l in p_list:
+        q_list.append(l.get('user_stock_quantity'))
+    print(q_list)
 
     data["Portfolio"] = Portfolio.objects.filter(user_account=account_holder)
     result_list = Portfolio.objects.filter(user_account=account_holder)
@@ -175,6 +178,8 @@ def form_results(request):
         price_list.append(support_functions.get_latest_price(entry.user_stock_ticker))
     data["price_list"] = price_list
     value=list()
-    for price in price_list:
-        value.append(price)
+    for i in range(0, len(price_list)):
+        value.append(float(price_list[i])*float(q_list[i]))
+    print('this is the print before value')
+    print(value)
     return render(request, "form_results.html", context=data)
