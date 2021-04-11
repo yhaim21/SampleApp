@@ -1,102 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-     h1 {
-      color:#c00;
-      font-family:sans-serif;
-      font-size:2em;
-      margin-bottom:0;
-    }
+{% extends "base1.html" %}
+{% block content %}
 
-    table {
-      font-family:sans-serif;
-      th, td {
-        padding:.25em .5em;
-        text-align:left;
-        &:nth-child(2) {
-          text-align:right;
-        }
-      }
-      td {
-        background-color:#eee;
-      }
-      th {
-        background-color:#009;
-        color:#fff;
-      }
-    }
-
-    .zigzag {
-      border-collapse:separate;
-      border-spacing:.25em 1em;
-      tbody tr:nth-child(odd) {
-        transform:rotate(2deg);
-      }
-      thead tr,
-      tbody tr:nth-child(even) {
-        transform:rotate(-2deg);
-      }
-    }
-</head>
-<body>
 <h2>{{ user.username }} protfolio summary:<h2> <br>
-<table class="zigzag">
-  <thead>
-    <tr>
-      <th class="header">Ticker</th>
-      <th class="header">Price</th>
-      <th class="header">Quantity</th>
-      <th class="header">Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-    {% for stock in Portfolio %}
-      <tr>{{ stock.user_stock_ticker }} </tr>
-    {% endfor %}      <td>53</td>
-    </tr>
-    <tr>
-      <td>Bobby Charlton</td>
-      <td>49</td>
-      <td>19 Apr 1958</td>
-      <td>20 May 1970</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-<table style="width:100%">
+<div id="table">
+<table>
   <tr>
     <th>Ticker</th>
     <th>Quantity</th>
     <th>Price</th>
     <th>Value</th>
-  </tr>
+ {% for i in zipped_list %}
     <tr>
-    {% for stock in Portfolio %}
-      <tr>{{ stock.user_stock_ticker }} </tr>
-    {% endfor %}
-  <tr>
-      {% for q in quantity_list %}
-      <td> {{ q }} </td>
-        {% endfor %}
-  </tr>
-  <tr>
-    {% for price in price_list %}
-    <td>{{ price }}</td>
-    {% endfor %}
-  </tr>
-  <tr>
-       {% for value in values %}
-            <td>{{ value }}</td>
-    {% endfor %}
-
-  </tr>
+        <td>{{i.0}}</td>
+        <td>{{i.1}}</td>
+        <td>{{i.2}}</td>
+        <td>{{i.3}}</td>
+    </tr>
+{% endfor %}
 </table>
-</body>
-</html>
+
+{% endblock %}

@@ -167,8 +167,10 @@ def form_results(request):
     print("this is the line printed before p1")
     p_list= list(Portfolio.objects.filter(user_account=account_holder).values())
     q_list=list()
+    t_list=list()
     for l in p_list:
         q_list.append(l.get('user_stock_quantity'))
+        t_list.append(l.get('user_stock_ticker'))
 
     data["Portfolio"] = Portfolio.objects.filter(user_account=account_holder)
     result_list = Portfolio.objects.filter(user_account=account_holder)
@@ -181,4 +183,7 @@ def form_results(request):
         value.append(float(price_list[i])*float(q_list[i]))
     data["quantity_list"]=q_list
     data["values"]=value
+    zipped_list = zip(t_list,q_list,price_list,value)
+    data = {'zipped_list': zipped_list}
+
     return render(request, "form_results.html", context=data)
