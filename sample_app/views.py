@@ -24,21 +24,7 @@ def show3divs(request):
 def showform(request):
     data=dict()
     return render(request,"form_test.html",context=data)
-def form_results(request):
-    data=dict()
-    user = request.user
-    account_holder=AccountHolder.objects.get(user=user)
-    ticker = request.GET['ticker']
-    quantity = request.GET['quantity']
-    try:
-        p1=Portfolio.objects.get(user_account=account_holder,user_stock_ticker=ticker)
-        p1.user_stock_quantity=quantity
-        p1.save()
-    except:
-        p1=Portfolio(user_account=account_holder,user_stock_ticker=ticker,user_stock_quantity=quantity)
-        p1.save()
-    data["Portfolio"]=Portfolio.objects.filter(user_account=account_holder)
-    return render(request,"form_results.html",context=data)
+
 def maintenance(request):
     data = dict()
     try:
@@ -129,6 +115,7 @@ def ticker_sel(request):
         data['ticker']=ticker
         print("error")
     return render(request,"company_details.html",data)
+
 def form_results2(request):
     data=dict()
     username = request.GET['name']
@@ -163,3 +150,25 @@ def handle_uploaded_file(request, f):
         print("Working")
     except Exception as error:
         print(error)
+
+def form_results(request):
+    data = dict()
+    user = request.user
+    account_holder = AccountHolder.objects.get(user=user)
+    ticker = request.GET['ticker']
+    quantity = request.GET['quantity']
+    try:
+        p1 = Portfolio.objects.get(user_account=account_holder, user_stock_ticker=ticker)
+        p1.user_stock_quantity = quantity
+        p1.save()
+    except:
+        p1 = Portfolio(user_account=account_holder, user_stock_ticker=ticker, user_stock_quantity=quantity)
+        p1.save()
+    data["Portfolio"] = Portfolio.objects.filter(user_account=account_holder)
+    result_list = Portfolio.objects.filter(user_account=account_holder)
+    price_list = list()
+    for entry in result_list:
+        price_list.append(support_functions.get_latest_price(entry.user_stock_ticker))
+    data["price_list"] = price_list
+    # data["value"] = pri
+    return render(request, "form_results.html", context=data)

@@ -173,3 +173,16 @@ def read_function():
     return
 # javascript for auto refresh
 #file upload by user
+
+def get_latest_price(stock):
+    import requests
+    from bs4 import BeautifulSoup
+    from time import sleep
+    url = Stock.objects.get(ticker=stock).url
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    table1 = soup.find_all('table')[2]
+    rows1 = table1.find_all('td')
+    stock_price = rows1[3].get_text()
+    sleep(1)
+    return stock_price
