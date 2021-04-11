@@ -3,24 +3,25 @@
 
 <h2>{{ user.username }} protfolio summary:<h2> <br>
 <div id="table">
-<table>
-  <tr>
+<table class="styled-table">
+    <thead>
+
+    <tr>
     <th>Ticker</th>
     <th>Quantity</th>
     <th>Price</th>
     <th>Value</th>
-    <th>Value</th>
-
+    </thad>
  {% for i in zipped_list %}
     <tr>
         <td>{{i.0}}</td>
         <td>{{i.1}}</td>
         <td>{{i.2}}</td>
         <td>{{i.3}}</td>
-        <td>{{i.4}}</td>
-
     </tr>
 {% endfor %}
 </table>
+
+=
 
 {% endblock %}

@@ -183,16 +183,7 @@ def form_results(request):
         value.append(float(price_list[i])*float(q_list[i]))
     data["quantity_list"]=q_list
     data["values"]=value
-    beta_list = list()
-    for entry in result_list:
-        t = entry.user_stock_ticker
-        price_list.append(support_functions.get_latest_price(t))
-        beta_list.append(
-            support_functions.get_stock_beta("https://finance.yahoo.com/quote/" + t + "?p=" + t + "&.tsrc=fin-srch"))
-    data["price_list"] = price_list
-    data["beta_list"] = beta_list
-    value = list()
-    zipped_list = zip(t_list,q_list,price_list,value, beta_list)
+    zipped_list = zip(t_list,q_list,price_list,value)
     data = {'zipped_list': zipped_list}
 
     return render(request, "form_results.html", context=data)
