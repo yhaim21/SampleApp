@@ -73,5 +73,10 @@ class UploadedFiles(models.Model):
     def __repr__(self):
         return self.user_uploaded_file.name
 
+class File(models.Model):
+    file = models.FileField()
+    def filename(self):
+        return os.path.basename(self.file.name)
+
 
 ...

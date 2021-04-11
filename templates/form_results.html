@@ -6,9 +6,6 @@
 </head>
 <body>
 Your name is: {{ user.username }} <br>
-{% for price in price_list %}
-{{ price }}
-{% endfor %}
 {% for stock in Portfolio %}
 You own {{ stock.user_stock_quantity }} of {{ stock.user_stock_ticker }} <br>
 {% endfor %}

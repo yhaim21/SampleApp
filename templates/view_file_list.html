@@ -6,8 +6,10 @@
 </head>
 <body>
 Your username is: {{ user.username }} <br>
-<a href="UploadedFiles" download> {{ UploadedFiles }} </a>
-<!--Your file: {{ UploadedFiles }}<br>-->
-
+<!--<a href="UploadedFiles" download> FILE WAS UPLOADED </a>-->
+You have uploaded the following files:<br>
+{% for file in UploadedFiles %}
+<a href="{{file.user_uploaded_file}}" download> {{file.user_uploaded_file.name}} </a><br>
+{% endfor %}
 </body>
 </html>
