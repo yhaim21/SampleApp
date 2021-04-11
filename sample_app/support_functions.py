@@ -186,3 +186,15 @@ def get_latest_price(stock):
     stock_price = rows1[3].get_text()
     sleep(1)
     return stock_price
+
+def get_stock_beta(url):
+    import requests
+    from bs4 import BeautifulSoup
+    from time import sleep
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    table1 = soup.find_all('table')[1]
+    span = table1.find_all('span')
+    beta = span[3].get_text()
+    sleep(1)
+    return beta
