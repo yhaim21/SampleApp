@@ -182,3 +182,5 @@ def form_results(request):
     print('this is the print before value')
     print(value)
     return render(request, "form_results.html", context=data)
+
+#Yoav
