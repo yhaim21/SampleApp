@@ -169,7 +169,6 @@ def form_results(request):
     q_list=list()
     for l in p_list:
         q_list.append(l.get('user_stock_quantity'))
-    print(q_list)
 
     data["Portfolio"] = Portfolio.objects.filter(user_account=account_holder)
     result_list = Portfolio.objects.filter(user_account=account_holder)
@@ -180,6 +179,6 @@ def form_results(request):
     value=list()
     for i in range(0, len(price_list)):
         value.append(float(price_list[i])*float(q_list[i]))
-    print('this is the print before value')
-    print(value)
+    data["quantity_list"]=q_list
+    data["values"]=value
     return render(request, "form_results.html", context=data)
