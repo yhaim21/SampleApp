@@ -149,7 +149,7 @@ def handle_uploaded_file(request, f):
         f1.save()
         print("Working")
     except Exception as error:
-        print(error)
+       xprint(error)
 
 def form_results(request):
     data = dict()
@@ -164,11 +164,17 @@ def form_results(request):
     except:
         p1 = Portfolio(user_account=account_holder, user_stock_ticker=ticker, user_stock_quantity=quantity)
         p1.save()
+    quantity=list()
+    print("this is the line printed before p1")
+    print(Portfolio.objects.only('user_stock_quantity'))
+
     data["Portfolio"] = Portfolio.objects.filter(user_account=account_holder)
     result_list = Portfolio.objects.filter(user_account=account_holder)
     price_list = list()
     for entry in result_list:
         price_list.append(support_functions.get_latest_price(entry.user_stock_ticker))
     data["price_list"] = price_list
-    # data["value"] = pri
+    value=list()
+    for price in price_list:
+        value.append(price)
     return render(request, "form_results.html", context=data)

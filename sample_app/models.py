@@ -61,9 +61,9 @@ class Portfolio(models.Model):
     user_stock_ticker = models.CharField(max_length=40)
     user_stock_quantity = models.CharField(max_length=40)
     def __str__(self):
-        return self.user_account.user+ " " + self.stock.name+ " " + self.stock.ticker+ " " + self.user_quantity
+        return self.user_account.user+ " " + self.stock.ticker+ " " + self.user_quantity
     def __repr__(self):
-        return self.user_account.user+ " " + self.stock.name+ " " + self.stock.ticker+ " " + self.user_quantity
+        return self.user_account.user+ " " + self.stock.ticker+ " " + self.user_quantity
 
 class UploadedFiles(models.Model):
     user_account = models.ForeignKey(AccountHolder, null=True, on_delete=models.SET_NULL)
