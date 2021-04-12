@@ -188,6 +188,7 @@ def form_results(request):
     data["values"]=value
     beta_w=0
     summ=0
+    print("we have value and q")
     for i in range(0, len(value)):
         if beta_list[i]=="N/A":
             pass
@@ -197,9 +198,12 @@ def form_results(request):
     beta_w=beta_w/summ
     beta_w_l=list()
     beta_w_l.append(beta_w)
+    print("we have value beta_w_l")
+
     for i in range(1, len(value)):
         beta_w_l.append(beta_w)
     print(beta_w_l)
     zipped_list = zip(t_list,q_list,price_list,value,beta_list,beta_w_l)
     data = {'zipped_list': zipped_list}
+    print("we have value zipped_list",zipped_list)
     return render(request, "form_results.html", context=data)
