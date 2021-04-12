@@ -164,7 +164,6 @@ def form_results(request):
     except:
         p1 = Portfolio(user_account=account_holder, user_stock_ticker=ticker, user_stock_quantity=quantity)
         p1.save()
-    print("this is the line printed before p1")
     p_list= list(Portfolio.objects.filter(user_account=account_holder).values())
     q_list=list()
     t_list=list()
@@ -175,15 +174,32 @@ def form_results(request):
     data["Portfolio"] = Portfolio.objects.filter(user_account=account_holder)
     result_list = Portfolio.objects.filter(user_account=account_holder)
     price_list = list()
+    beta_list = list()
     for entry in result_list:
-        price_list.append(support_functions.get_latest_price(entry.user_stock_ticker))
+        t = entry.user_stock_ticker
+        price_list.append(support_functions.get_latest_price(t))
+        beta_list.append(
+            support_functions.get_stock_beta("https://finance.yahoo.com/quote/" + t + "?p=" + t + "&.tsrc=fin-srch"))
     data["price_list"] = price_list
     value=list()
     for i in range(0, len(price_list)):
         value.append(float(price_list[i])*float(q_list[i]))
     data["quantity_list"]=q_list
     data["values"]=value
-    zipped_list = zip(t_list,q_list,price_list,value)
+    beta_w=0
+    summ=0
+    for i in range(0, len(value)):
+        if beta_list[i]=="N/A":
+            pass
+        else:
+            beta_w=beta_w + (float(value[i])*float(beta_list[i]))
+            summ=summ+value[i]
+    beta_w=beta_w/summ
+    beta_w_l=list()
+    beta_w_l.append(beta_w)
+    for i in range(1, len(value)):
+        beta_w_l.append(beta_w)
+    print(beta_w_l)
+    zipped_list = zip(t_list,q_list,price_list,value,beta_list,beta_w_l)
     data = {'zipped_list': zipped_list}
-
     return render(request, "form_results.html", context=data)

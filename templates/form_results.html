@@ -12,6 +12,8 @@
     <th class="c2">Quantity</th>
     <th class="c3">Price</th>
     <th class="c4">Value</th>
+    <th class="c2">Beta</th>
+    <th class="c3">Protfolio Beta</th>
     </thad>
  {% for i in zipped_list %}
     <tr>
@@ -19,9 +21,13 @@
         <th class="c2">{{i.1}}</td>
         <th class="c3">{{i.2}}</td>
         <th class="c4">{{i.3}}</td>
+        <th class="c2">{{i.4}}</td>
+        <th class="c3">{{i.5}}</td>
     </tr>
-{% endfor %}
+    {% endfor %}
 </table>
+</div>
+
 
 
 {% endblock %}

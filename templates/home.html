@@ -1,7 +1,7 @@
 {% extends "base1.html" %}
 {% block content %}
         <div class="jumbotron text-center">
-        <p>change</p>
+        <p>World  #1 investing site</p>
     </div>
 <div class="container">
         <div class="row">
@@ -21,7 +21,7 @@
                     <a href="{% url 'company_info' %}">search for a stock</a><br>
             </div>
             <div class="col-sm-4">
-                <h3>The future!</h3>
+                <h3>The community!</h3>
                 <form enctype="multipart/form-data" method="post" action="{% url 'upload_file'%}">
                     {% csrf_token %}
                     <label for="myfile">Upload Analysis Here </label>
